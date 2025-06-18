@@ -1,0 +1,24 @@
+# Node modules (installed libraries)
+node_modules/
+
+# Environment variables (passwords etc.)
+.env
+
+# Logs
+logs/
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Cache
+.cache/
+npm-debug.log*
+
+# Build output (if you build later)
+dist/
+build/
+
+# Coverage reports (if testing is added later)
+coverage/
