@@ -2,6 +2,11 @@
 
 This is a Node.js backend API that uses MongoDB for data storage.
 
+## Deployment Status
+
+✅ **Successfully deployed on Railway!**  
+The application is now running in production with MongoDB integration.
+
 ## Local Development
 
 1. Install dependencies:
@@ -57,6 +62,10 @@ npm run dev
 ### Leads
 - GET `/api/leads` - Get all leads
 - POST `/api/leads` - Create a new lead
+
+### Health Checks
+- GET `/health` - Check API status
+- GET `/health/db` - Check MongoDB connection status
 
 ## Environment Variables
 
