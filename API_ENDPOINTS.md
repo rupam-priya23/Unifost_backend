@@ -8,7 +8,7 @@ https://mern-backend-production-a933.up.railway.app
 ## Authentication
 - **Register**: `POST /api/auth/register`
   ```json
-  {"name": "Name", "email": "email@example.com", "phone": "1234567890", "dob": "1990-01-01", "gender": "male", "course": "Course Name", "password": "password123", "university": "University Name"}
+  {"name": "Name", "email": "email@example.com", "phone": "1234567890", "dob": "1990-01-01", "gender": "male", "course": "Course Name", "password": "password123"}
   ```
 
 - **Login**: `POST /api/auth/login`
