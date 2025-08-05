@@ -2,14 +2,14 @@ const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema(
   {
-    name: { 
-      type: String, 
+    name: {
+      type: String,
       required: [true, 'Name is required'],
       trim: true,
       minlength: [2, 'Name must be at least 2 characters long']
     },
-    email: { 
-      type: String, 
+    email: {
+      type: String,
       required: [true, 'Email is required'],
       unique: true,
       trim: true,
@@ -19,27 +19,33 @@ const userSchema = new mongoose.Schema(
         'Please provide a valid email address'
       ]
     },
-    phone: { 
-      type: String, 
+    phone: {
+      type: String,
       required: [true, 'Phone number is required'],
       trim: true
     },
-    dob: { 
-      type: Date, 
-      required: [true, 'Date of birth is required']
-    },
-    gender: { 
-      type: String, 
-      enum: ['male', 'female', 'other'], 
-      required: [true, 'Gender is required']
-    },
-    course: { 
-      type: String, 
+    course: {
+      type: String,
       required: [true, 'Course is required'],
       trim: true
     },
-    passwordHash: { 
-      type: String, 
+    university: {
+      type: String,
+      required: [true, 'University is required'],
+      trim: true
+    },
+    qualification: {
+      type: String,
+      required: [true, 'Qualification is required'],
+      trim: true
+    },
+    experience: {
+      type: String,
+      required: [true, 'Experience is required'],
+      trim: true
+    },
+    passwordHash: {
+      type: String,
       required: true
     },
     active: {

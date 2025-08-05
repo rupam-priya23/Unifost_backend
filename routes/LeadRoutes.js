@@ -16,9 +16,9 @@ router.get('/', async (req, res) => {
 // ───── POST a new Lead (optional, if needed separately) ─────
 router.post('/', async (req, res) => {
   try {
-    const { name, email, phone, course } = req.body;
+    const { name, email, phone, course, university, qualification,experience, password, } = req.body;
 
-    const newLead = new Lead({ name, email, phone, course });
+    const newLead = new Lead({ name, email, phone, course,university, qualification,experience, password,  });
     await newLead.save();
 
     res.status(201).json({ success: true, message: "Lead saved successfully" });

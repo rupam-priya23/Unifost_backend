@@ -4,18 +4,19 @@ const { register, login, logout } = require('../controllers/authController');
 
 const router = express.Router();
 
-/* validation rules reused for register */
+// Validation rules for registration
 const registerValidation = [
   body('name').notEmpty().withMessage('Name is required'),
-  body('email').isEmail().withMessage('Valid email required'),
-  body('phone').isMobilePhone().withMessage('Valid phone required'),
-  body('dob').isISO8601().toDate(),
-  body('gender').isIn(['male', 'female', 'other']),
-  body('course').notEmpty(),
-  body('password').isLength({ min: 6 }),
+  body('email').isEmail().withMessage('Valid email is required'),
+  body('phone').isMobilePhone().withMessage('Valid phone number is required'),
+  body('course').notEmpty().withMessage('Course is required'),
+  body('university').notEmpty().withMessage('University is required'),
+  body('qualification').notEmpty().withMessage('Qualification is required'),
+  body('experience').notEmpty().withMessage('Experience is required'),
+  body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
 ];
 
-/* /api/auth */
+// Routes
 router.post('/register', registerValidation, register);
 router.post('/login', login);
 router.post('/logout', logout);
