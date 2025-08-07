@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const { validationResult } = require('express-validator');
 const User = require('../models/User');
 const Lead = require('../models/Lead');
+const GeneralLead = require('../models/GenralLead');
 
 /* ─────────✅ UTIL TO SIGN & RETURN JWT ───────── */
 const sendToken = (user, statusCode, res) => {
@@ -144,3 +145,27 @@ exports.logout = (_, res) => {
   res.cookie('token', '', { httpOnly: true, expires: new Date(0) })
     .json({ success: true, message: 'Logged out' });
 };
+
+
+// controllers/authController.js
+
+ 
+
+exports.createGeneralLead = async (req, res) => {
+  try {
+    const { name, email, phone, message } = req.body;
+
+    if (!name || !email || !phone || !message) {
+      return res.status(400).json({ success: false, message: "All fields are required" });
+    }
+
+    const lead = new GeneralLead({ name, email, phone, message });
+    await lead.save();
+
+    res.status(201).json({ success: true, message: "Lead submitted successfully" });
+  } catch (error) {
+    console.error("Error saving general lead:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+};
+
