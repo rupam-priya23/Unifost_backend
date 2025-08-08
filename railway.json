@@ -1,5 +1,5 @@
 {
-  "$schema": "https://railway.app/railway.schema.json",
+  "$schema": "https://unifost-backend-hkz8.onrender.com",
   "build": {
     "builder": "nixpacks",
     "buildCommand": "npm run build"
