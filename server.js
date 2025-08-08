@@ -15,18 +15,44 @@ const openaiRoutes = require('./routes/openaiRoutes');
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-// ✅ CORS origins from env
-const corsOrigins = process.env.FRONTEND_URL
-  ? process.env.FRONTEND_URL.split(',').map(origin => origin.trim())
+// Build allowed origins array
+const allowedOrigins = process.env.FRONTEND_URL
+  ? process.env.FRONTEND_URL.split(',').map(o => o.trim())
   : [];
+
+// Add www. and non-www. variants automatically
+const expandedOrigins = new Set();
+allowedOrigins.forEach(origin => {
+  expandedOrigins.add(origin);
+  if (origin.includes('://www.')) {
+    expandedOrigins.add(origin.replace('://www.', '://'));
+  } else {
+    const url = new URL(origin);
+    expandedOrigins.add(`${url.protocol}//www.${url.hostname}${url.port ? ':' + url.port : ''}`);
+  }
+});
 
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// ✅ CORS middleware
+// Debug middleware to log request origins
+app.use((req, res, next) => {
+  console.log("Request Origin:", req.headers.origin);
+  next();
+});
+
+// Dynamic CORS handling
 app.use(cors({
-  origin: corsOrigins,
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true); // Allow tools like Postman
+    if (expandedOrigins.has(origin)) {
+      callback(null, true);
+    } else {
+      console.error("❌ CORS blocked for origin:", origin);
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE"]
 }));
