@@ -23,7 +23,7 @@ const enquirySchema = new mongoose.Schema({
   },
   course: { 
     type: String, 
-    required: [true, 'Course is required'],
+    default: 'Not specified',
     trim: true 
   },
   university: { 
