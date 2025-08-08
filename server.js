@@ -63,9 +63,12 @@ app.use(errorHandler);
 const startServer = async () => {
   try {
     await connectDB();
-    app.listen(PORT, () => {
-      console.log(`\n✅ Server is running at http://localhost:${PORT}`);
+    
+    // 🔥 IMPORTANT: Use 0.0.0.0 for Render hosting!
+    app.listen(PORT, '0.0.0.0', () => {
+      console.log(`\n✅ Server is running on port ${PORT}`);
     });
+
   } catch (err) {
     console.error('❌ Server start error:', err);
     process.exit(1);
